@@ -86,13 +86,13 @@ public class PedidoRepository {
         }
     }
 
-    public boolean delete(Pedido pedido) {
+    public boolean delete(int id) {
         String query = "DELETE FROM pedidos WHERE id_pedido = ?";
 
         try (Connection connection = DBConnection.getConnection()) {
 
             PreparedStatement ps = connection.prepareStatement(query);
-            ps.setInt(1, pedido.getIdPedido());
+            ps.setInt(1, id);
 
             System.out.print(ps.executeUpdate());
             return ps.executeUpdate() > 0;

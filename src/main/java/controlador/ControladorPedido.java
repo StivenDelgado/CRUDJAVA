@@ -14,9 +14,9 @@ import servicio.ServicioPedido;
  * @author DIEGO ANDRES
  */
 public class ControladorPedido {
-    ServicioPedido servicioPedido;
-    public void save(String nombre, String email, String telefono ,double total){
-        servicioPedido.save(new Pedido(new Cliente(nombre, email, telefono), total));
+    ServicioPedido servicioPedido = new ServicioPedido();
+    public void save(int idCliente,String nombre, String email, String telefono ,double total){
+        servicioPedido.save(new Pedido(new Cliente(idCliente,nombre, email, telefono), total));
     }
     public ArrayList<Pedido> listarPedidos(){
         return servicioPedido.listarPedidos();
@@ -24,7 +24,7 @@ public class ControladorPedido {
     public void update(int idPedido, int idcliente, String nombre, String email, String telefono, String fechaPedido, double total){
         servicioPedido.update(new Pedido(idPedido, new Cliente(nombre, email, telefono), fechaPedido, total));
     }
-    public void delete(int idPedido, int idcliente, String nombre, String email, String telefono, String fechaPedido, double total){
-        servicioPedido.delete(new Pedido(idPedido, new Cliente(nombre, email, telefono), fechaPedido, total));
+    public void delete(int idPedido){
+        servicioPedido.delete(idPedido);
     }
 }

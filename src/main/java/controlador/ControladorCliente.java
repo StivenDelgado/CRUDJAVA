@@ -6,7 +6,6 @@ package controlador;
 
 import java.util.ArrayList;
 import modelo.Cliente;
-import repositorio.ClienteRepository;
 import servicio.ServicioCliente;
 
 /**
@@ -15,7 +14,7 @@ import servicio.ServicioCliente;
  */
 public class ControladorCliente {
     
-    ServicioCliente servicioCliente;
+    ServicioCliente servicioCliente = new ServicioCliente();
         public void save(String nombre,String email,String telefono){
         servicioCliente.save(new Cliente(nombre, email, telefono));
     }

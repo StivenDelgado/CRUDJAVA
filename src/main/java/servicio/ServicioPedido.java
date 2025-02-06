@@ -14,7 +14,8 @@ import repositorio.PedidoRepository;
  * @author DIEGO ANDRES
  */
 public class ServicioPedido {
-    PedidoRepository pedidoRepository;
+    
+    PedidoRepository pedidoRepository = new PedidoRepository();
     public void save(Pedido pedido){
         pedidoRepository.save(pedido);
     }
@@ -24,7 +25,7 @@ public class ServicioPedido {
     public void update(Pedido pedido){
         pedidoRepository.update(pedido);
     }
-    public void delete(Pedido pedido){
-        pedidoRepository.delete(pedido);
+    public void delete(int id){
+        pedidoRepository.delete(id);
     }
 }

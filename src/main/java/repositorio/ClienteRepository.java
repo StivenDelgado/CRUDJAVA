@@ -56,7 +56,7 @@ public class ClienteRepository {
                 lista.add(cliente);
             }
         } catch (SQLException ex) {
-
+            ex.printStackTrace();
         }
         return lista;
     }

@@ -13,7 +13,7 @@ import repositorio.ClienteRepository;
  * @author DIEGO ANDRES
  */
 public class ServicioCliente {
-    ClienteRepository clienteRepository;
+    ClienteRepository clienteRepository = new ClienteRepository();
     
     public void save(Cliente cliente){
         clienteRepository.save(cliente);
