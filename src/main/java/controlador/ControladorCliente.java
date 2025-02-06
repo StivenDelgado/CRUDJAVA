@@ -16,8 +16,8 @@ import servicio.ServicioCliente;
 public class ControladorCliente {
     
     ServicioCliente servicioCliente;
-        public void save(int id ,String nombre,String email,String telefono){
-        servicioCliente.save(new Cliente(id, nombre, email, telefono));
+        public void save(String nombre,String email,String telefono){
+        servicioCliente.save(new Cliente(nombre, email, telefono));
     }
     
     public ArrayList<Cliente> listarClientes(){

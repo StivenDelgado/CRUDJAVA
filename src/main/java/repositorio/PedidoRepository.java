@@ -17,17 +17,15 @@ import modelo.Pedido;
  *
  * @author juand
  */
-public class PedidoRepository {
-
-   
-    public void save(Pedido pedido, int idCliente) {
+public class PedidoRepository {   
+    public void save(Pedido pedido) {
 
         String query = "INSERT INTO pedidos (cliente_id, total) VALUES(?,?)";
 
         try (Connection connection = DBConnection.getConnection()) {
 
             PreparedStatement ps = connection.prepareStatement(query);
-            ps.setInt(1, idCliente);
+            ps.setInt(1, pedido.getCliente().getId());
             ps.setDouble(2, pedido.getTotal());
 
             ps.executeUpdate();
