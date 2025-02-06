@@ -18,7 +18,7 @@ import modelo.Cliente;
  */
 public class ClienteRepository {
 
-    public static void save(Cliente cliente) {
+    public void save(Cliente cliente) {
 
         String query = "INSERT INTO clientes (nombre_cliente, email, telefono) VALUES(?,?,?)";
 
@@ -51,14 +51,49 @@ public class ClienteRepository {
                 String nombre = rs.getString("nombre_cliente");
                 String email = rs.getString("email");
                 String telefono = rs.getString("telefono");
-                
-                Cliente cliente = new Cliente(nombre, email, telefono);
+
+                Cliente cliente = new Cliente(idCliente, nombre, email, telefono);
                 lista.add(cliente);
             }
         } catch (SQLException ex) {
 
         }
         return lista;
+    }
+
+    public boolean update(Cliente cliente) {
+        String query = "UPDATE clientes SET nombre_cliente = ?, email = ?, telefono = ? WHERE id_cliente = ?";
+
+        try (Connection connection = DBConnection.getConnection()) {
+
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setString(1, cliente.getNombre());
+            ps.setString(2, cliente.getEmail());
+            ps.setString(3, cliente.getTelefono());
+            ps.setInt(4, cliente.getId());
+
+            System.out.print("Cliente actulizado correctamente.");
+            return ps.executeUpdate() > 0;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean delete(Cliente cliente) {
+        String query = "DELETE FROM clientes WHERE id_cliente = ?";
+
+        try (Connection connection = DBConnection.getConnection()) {
+
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, cliente.getId());
+
+            System.out.print("Cliente borrado correctamente.");
+            return ps.executeUpdate() > 0;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        }
     }
 
 }

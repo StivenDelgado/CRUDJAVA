@@ -20,6 +20,14 @@ public class Pedido {
         this.total = total;
     }
 
+    public Pedido(int idPedido, Cliente cliente, String fechaPedido, double total) {
+        this.idPedido = idPedido;
+        this.cliente = cliente;
+        this.fechaPedido = fechaPedido;
+        this.total = total;
+    }
+
+    
     public int getIdPedido() {
         return idPedido;
     }
