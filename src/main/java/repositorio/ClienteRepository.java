@@ -7,7 +7,9 @@ package repositorio;
 import CRUDJAVA.CRUDJAVA.connection.DBConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import modelo.Cliente;
 
 /**
@@ -19,7 +21,7 @@ public class ClienteRepository {
     public static void save(Cliente cliente) {
 
         String query = "INSERT INTO clientes (nombre_cliente, email, telefono) VALUES(?,?,?)";
-              
+
         try (Connection connection = DBConnection.getConnection()) {
 
             PreparedStatement ps = connection.prepareStatement(query);
@@ -34,6 +36,29 @@ public class ClienteRepository {
             ex.printStackTrace();
 
         }
+    }
+
+    public ArrayList<Cliente> listarClientes() {
+        //Erecordatorio para mi el 0 significa que esta vacia osea false 
+        String query = "SELECT * FROM clientes";
+        ArrayList<Cliente> lista = new ArrayList<Cliente>();
+        try (Connection con = DBConnection.getConnection()) {
+            PreparedStatement ps = con.prepareStatement(query);
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                int idCliente = rs.getInt("id_cliente");
+                String nombre = rs.getString("nombre_cliente");
+                String email = rs.getString("email");
+                String telefono = rs.getString("telefono");
+                
+                Cliente cliente = new Cliente(nombre, email, telefono);
+                lista.add(cliente);
+            }
+        } catch (SQLException ex) {
+
+        }
+        return lista;
     }
 
 }

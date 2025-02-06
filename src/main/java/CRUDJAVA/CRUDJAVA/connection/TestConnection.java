@@ -16,8 +16,10 @@ public class TestConnection {
            }
            DBConnection.closeConnection(connection);
            
-           Cliente cliente = new Cliente("Freddy", "freddy@gmail.com", "3208888");
-           ClienteRepository.save(cliente);
+           Cliente cliente = new Cliente("Freddy", "freddy@gmail.com", "9876543");
+           //ClienteRepository.save(cliente);
+           
+           //ClienteRepository.update(cliente);
 	}
         
         
