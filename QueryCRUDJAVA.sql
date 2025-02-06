@@ -9,7 +9,7 @@
 -- CREATE DATABASE CRUDJAVA;
 USE crudjava;
 
-
+/*
 CREATE TABLE IF NOT EXISTS clientes (
     `id_cliente` INT NOT NULL AUTO_INCREMENT,
     `nombre_cliente` VARCHAR(100) NOT NULL,
@@ -31,12 +31,12 @@ INSERT INTO clientes (nombre_cliente, email, telefono) VALUES
 
 
 
-/*1. Consultas con JOINs en SQL
+1. Consultas con JOINs en SQL
 • (Rama: extra-joins-sql)
 • Crear una tabla pedidos que tenga una relación con clientes (FK cliente_id).
 • Obtener la lista de clientes con la cantidad de pedidos realizados.
 • Encontrar los clientes que no han realizado ningún pedido.
-*/
+
 CREATE TABLE IF NOT EXISTS pedidos (
     `id_pedido` INT NOT NULL AUTO_INCREMENT,
     `cliente_id` INT NOT NULL,
@@ -45,4 +45,14 @@ CREATE TABLE IF NOT EXISTS pedidos (
     PRIMARY KEY (`id_pedido`),
     FOREIGN KEY (`cliente_id`) REFERENCES clientes(`id_cliente`)
 );
+*/
 
+
+INSERT INTO pedidos ( cliente_id , total) VALUES
+(1,1500);
+
+SELECT id_cliente , nombre_cliente ,(SELECT COUNT(*) FROM pedidos p WHERE p.cliente_id = c.id_cliente)as cantidad_pedidos FROM clientes c;
+
+
+SELECT  id_cliente , nombre_cliente
+FROM clientes c LEFT JOIN pedidos p ON c.id_cliente = p.cliente_id  WHERE p.cliente_id IS NULL ;
